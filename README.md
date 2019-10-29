@@ -1,6 +1,6 @@
 # Potion-Descriptions 
 #### **Forked from [Enchantment Descriptions](https://github.com/Darkhax-Minecraft/Enchantment-Descriptions)**
-Will display descriptions about a potionon the tooltip.
+Will display descriptions about a potion to the tooltip.
 
 ## Adding support
 
