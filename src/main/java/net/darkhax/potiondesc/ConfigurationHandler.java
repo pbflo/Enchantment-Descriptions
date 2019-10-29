@@ -37,7 +37,7 @@ public final class ConfigurationHandler {
      */
     public static void syncConfig () {
 
-        setExploreMode(config.getBoolean("exploreMode", Configuration.CATEGORY_GENERAL, false, "Should the mod generate a list of enchantments from the instance that have no description?"));
+        setExploreMode(config.getBoolean("exploreMode", Configuration.CATEGORY_GENERAL, false, "Should the mod generate a list of potion types from the instance that have no description?"));
 
         if (config.hasChanged()) {
             config.save();
