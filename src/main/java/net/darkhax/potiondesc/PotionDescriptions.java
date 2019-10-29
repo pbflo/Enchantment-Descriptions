@@ -15,7 +15,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import net.minecraft.init.PotionTypes;
+import net.minecraft.init.PotionType;
 
 @Mod(modid = "potiondesc", name = "Potion Descriptions", version = "@VERSION@", clientSideOnly = true, certificateFingerprint = "@FINGERPRINT@")
 public class PotionDescriptions {
