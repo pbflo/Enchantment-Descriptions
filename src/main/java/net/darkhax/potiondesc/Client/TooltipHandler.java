@@ -9,8 +9,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.GameSettings;
 import net.minecraft.client.settings.KeyBinding;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.item.ItemEnchantedBook;
+//import net.minecraft.enchantment.Enchantment;
+//import net.minecraft.item.ItemEnchantedBook;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
@@ -20,6 +20,9 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistryEntry;
+
+import net.minecraft.potion.PotionType;
+import net.minecraft.item.ItemPotion;
 
 @SideOnly(Side.CLIENT)
 public class TooltipHandler {
@@ -34,23 +37,23 @@ public class TooltipHandler {
             return;
         }
 
-        if (!event.getItemStack().isEmpty() && event.getItemStack().getItem() instanceof ItemEnchantedBook) {
+        if (!event.getItemStack().isEmpty() && event.getItemStack().getItem() instanceof ItemPotion) {
 
             final List<String> tooltip = event.getToolTip();
 
             if (GameSettings.isKeyDown(keyBindSneak)) {
 
-                final List<Enchantment> enchants = this.getEnchantments(event.getItemStack());
+                final List<PotionType> potiontypes = this.getPotionType(event.getItemStack());
 
-                for (final Enchantment enchant : enchants) {
+                for (final PotionType potion : potiontypes) {
 
-                    tooltip.add(I18n.format("tooltip.enchdesc.name") + ": " + I18n.format(enchant.getName()));
-                    tooltip.add(this.getDescription(enchant));
-                    tooltip.add(I18n.format("tooltip.enchdesc.addedby") + ": " + ChatFormatting.BLUE + getModName(enchant));
+                    tooltip.add(I18n.format("tooltip.potiondesc.name") + ": " + I18n.format(potion.getName()));
+                    tooltip.add(this.getDescription(potion));
+                    tooltip.add(I18n.format("tooltip.potiondesc.addedby") + ": " + ChatFormatting.BLUE + getModName(potion));
                 }
             }
             else {
-                tooltip.add(I18n.format("tooltip.enchdesc.activate", ChatFormatting.LIGHT_PURPLE, keyBindSneak.getDisplayName(), ChatFormatting.GRAY));
+                tooltip.add(I18n.format("tooltip.potiondesc.activate", ChatFormatting.LIGHT_PURPLE, keyBindSneak.getDisplayName(), ChatFormatting.GRAY));
             }
         }
     }
@@ -61,13 +64,13 @@ public class TooltipHandler {
      * @param enchantment The enchantment to get a description for.
      * @return The enchantment description.
      */
-    private String getDescription (Enchantment enchantment) {
+    private String getDescription (PotionType potion) {
 
-        final String key = getTranslationKey(enchantment);
+        final String key = getTranslationKey(potion);
         String description = I18n.format(key);
 
-        if (description.startsWith("enchantment.")) {
-            description = I18n.format("tooltip.enchdesc.missing", getModName(enchantment), key);
+        if (description.startsWith("potion.")) {
+            description = I18n.format("tooltip.potiondesc.missing", getModName(potion), key);
         }
 
         return description;
@@ -81,25 +84,25 @@ public class TooltipHandler {
      * @param stack The stack to read the data from.
      * @return The list of enchantments stored on the stack.
      */
-    private List<Enchantment> getEnchantments (ItemStack stack) {
+    private List<PotionType> getPotionType (ItemStack stack) { //ToDo: Rewrite
 
-        final NBTTagList enchTags = ItemEnchantedBook.getEnchantments(stack);
-        final List<Enchantment> enchantments = new ArrayList<>();
+        final NBTTagList potionTags = ItemPotion.getPotionType(stack);
+        final List<PotionType> potiontypes = new ArrayList<>();
 
-        if (enchTags != null) {
+        if (potionTags != null) {
 
-            for (int index = 0; index < enchTags.tagCount(); ++index) {
+            for (int index = 0; index < potionTags.tagCount(); ++index) {
 
-                final int id = enchTags.getCompoundTagAt(index).getShort("id");
-                final Enchantment enchant = Enchantment.getEnchantmentByID(id);
+                final int id = potionTags.getCompoundTagAt(index).getShort("id"); 
+                final PotionType potion = PotionType.getEnchantmentByID(id);
 
-                if (enchant != null) {
-                    enchantments.add(enchant);
+                if (potion != null) {
+                    potiontypes.add(potion);
                 }
             }
         }
 
-        return enchantments;
+        return potiontypes;
     }
 
     /**
@@ -121,11 +124,11 @@ public class TooltipHandler {
         return "NULL";
     }
 
-    public static String getTranslationKey (Enchantment enchant) {
+    public static String getTranslationKey (PotionType potion) {
 
-        if (enchant != null && enchant.getRegistryName() != null) {
+        if (potion != null && potion.getRegistryName() != null) {
 
-            return String.format("enchantment.%s.%s.desc", enchant.getRegistryName().getNamespace(), enchant.getRegistryName().getPath());
+            return String.format("potion.%s.%s.desc", potion.getRegistryName().getNamespace(), potion.getRegistryName().getPath());
         }
 
         return "NULL";
