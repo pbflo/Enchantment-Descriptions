@@ -1,9 +1,7 @@
-# Enchantment-Descriptions [![](http://cf.way2muchnoise.eu/250419.svg)](https://minecraft.curseforge.com/projects/enchantment-descriptions) [![](http://cf.way2muchnoise.eu/versions/250419.svg)](https://minecraft.curseforge.com/projects/enchantment-descriptions)
-Displays descriptions about an enchantment on the tooltip.
-
-[![Nodecraft](https://nodecraft.com/assets/images/logo-dark.png)](https://nodecraft.com/r/darkhax)
-This project is sponsored by Nodecraft. Use code [Darkhax](https://nodecraft.com/r/darkhax) for 30% off your first month of service!
+# Potion-Descriptions 
+#### **Forked from [Enchantment Descriptions](https://github.com/Darkhax-Minecraft/Enchantment-Descriptions)**
+Will display descriptions about a potionon the tooltip.
 
 ## Adding support
 
-This mod uses a simple format for enchantment descriptions. You can add support for this mod and others using the format by adding a translation key to your language file. The format is `enchantment.MODID.ENDID.desc=`.
+This mod uses a simple format for potion descriptions. You can add support for this mod and others using the format by adding a translation key to your language file. The format is `potion.MODID.ENDID.desc=`.
