@@ -23,6 +23,7 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
 
 import net.minecraft.potion.PotionType;
 import net.minecraft.item.ItemPotion;
+import net.minecraft.potion.PotionUtils;
 
 @SideOnly(Side.CLIENT)
 public class TooltipHandler {
@@ -43,14 +44,14 @@ public class TooltipHandler {
 
             if (GameSettings.isKeyDown(keyBindSneak)) {
 
-                final List<PotionType> potiontypes = this.getPotionType(event.getItemStack());
+                final PotionType potiontype = this.getPotionType(event.getItemStack());
 
-                for (final PotionType potion : potiontypes) {
+               // for (final PotionType potion : potiontypes) {
 
-                    tooltip.add(I18n.format("tooltip.potiondesc.name") + ": " + I18n.format(potion.getName()));
-                    tooltip.add(this.getDescription(potion));
-                    tooltip.add(I18n.format("tooltip.potiondesc.addedby") + ": " + ChatFormatting.BLUE + getModName(potion));
-                }
+                    tooltip.add(I18n.format("tooltip.potiondesc.name") + ": " + I18n.format(potiontype.getName()));
+                    tooltip.add(this.getDescription(potiontype));
+                    tooltip.add(I18n.format("tooltip.potiondesc.addedby") + ": " + ChatFormatting.BLUE + getModName(potiontype));
+                //}
             }
             else {
                 tooltip.add(I18n.format("tooltip.potiondesc.activate", ChatFormatting.LIGHT_PURPLE, keyBindSneak.getDisplayName(), ChatFormatting.GRAY));
@@ -59,10 +60,10 @@ public class TooltipHandler {
     }
 
     /**
-     * Gets the description of the enchantment. Or the missing text, if no description exists.
+     * Gets the description of the potion. Or the missing text, if no description exists.
      *
-     * @param enchantment The enchantment to get a description for.
-     * @return The enchantment description.
+     * @param potion The potion type to get a description for.
+     * @return The potion description.
      */
     private String getDescription (PotionType potion) {
 
@@ -77,15 +78,16 @@ public class TooltipHandler {
     }
 
     /**
-     * Reads a List of enchantments from an ItemEnchantedBook stack.
+     * Reads the potion type from an ItemPotion.
      *
-     * @param book Instance of ItemEnchantedBook, as it uses non-static methods for some
-     *        reason.
      * @param stack The stack to read the data from.
-     * @return The list of enchantments stored on the stack.
+     * @return The list of potions stored on the stack.
      */
-    private List<PotionType> getPotionType (ItemStack stack) { //ToDo: Rewrite
-
+    private PotionType getPotionType (ItemStack stack) { //ToDo: Rewrite
+        
+        final PotionType potiontype = getPotionFromItem(stack);
+        
+        /*
         final NBTTagList potionTags = ItemPotion.getPotionType(stack);
         final List<PotionType> potiontypes = new ArrayList<>();
 
@@ -101,8 +103,9 @@ public class TooltipHandler {
                 }
             }
         }
+        */
 
-        return potiontypes;
+        return potiontype;
     }
 
     /**
