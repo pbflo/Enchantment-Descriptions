@@ -1,14 +1,15 @@
 [  
    {  
-      "modid":"enchdesc",
-      "name":"Enchantment Descriptions",
-      "description":"Shows information about enchantments on enchantment books.",
+      "modid":"potiondesc",
+      "name":"Potion Descriptions",
+      "description":"Shows information about potion types on Potions.",
       "version":"${version}",
       "mcversion":"${mcversion}",
       "url":"http://www.darkhax.net",
       "updateUrl":"",
       "authorList":[  
-         "Darkhax"
+         "Darkhax",
+         "pbflo"
       ],
       "credits":"",
       "logoFile":"",
