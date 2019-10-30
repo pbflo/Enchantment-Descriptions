@@ -1,0 +1,11 @@
+#Potion Descriptions German Language File
+
+#Enchantment Tooltip
+tooltip.enchdesc.name=Trank
+tooltip.enchdesc.addedby=Hinzugefügt druch
+tooltip.enchdesc.missing=Keine Beschreibung gefunden. Bitte fragen sie den Autor von %s eine hinzuzufügen. Lokalisierungsschlüssel ist %s
+tooltip.enchdesc.activate=Drück %s%s%s für Trank Beschreibungen.
+
+#Vanilla Enchantment Descriptions
+potion.minecraft.regeneration.desc=Regeneriert Gesundheit über Zeit. 
+potion.minecraft.swiftness.desc=Erhöht die Geschwindigkeit und das FOV.
