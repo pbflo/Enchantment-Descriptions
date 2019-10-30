@@ -4,4 +4,4 @@ Will display descriptions about a potion to the tooltip.
 
 ## Adding support
 
-This mod uses a simple format for potion descriptions. You can add support for this mod and others using the format by adding a translation key to your language file. The format is `potion.MODID.ENDID.desc=`.
+This mod uses a simple format for potion descriptions. You can add support for this mod and others using the format by adding a translation key to your language file. The format is `potion.MODID.POTIONID.desc=`.
