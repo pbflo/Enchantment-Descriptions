@@ -8,4 +8,4 @@ tooltip.enchdesc.activate=Press %s%s%s for potion descriptions.
 
 #Vanilla Enchantment Descriptions
 potion.minecraft.regeneration.desc=Restores health over time. 
-potion.minecraft.swiftness.desc=Increases speed and POV.
+potion.minecraft.swiftness.desc=Increases speed and FOV.
