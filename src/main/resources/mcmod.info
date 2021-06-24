@@ -2,16 +2,16 @@
    {  
       "modid":"potiondesc",
       "name":"Potion Descriptions",
-      "description":"Shows information about potion types on Potions.",
+      "description":"Shows information about potion effects on Potions.",
       "version":"${version}",
       "mcversion":"${mcversion}",
-      "url":"http://www.darkhax.net",
       "updateUrl":"",
-      "authorList":[  
-         "Darkhax",
-         "pbflo"
+      "url": "",
+      "authorList":[
+         "pbflo",
+         "Darkhax"
       ],
-      "credits":"",
+      "credits":"Darkhax for creating \"Enchantment Descriptions\"",
       "logoFile":"",
       "screenshots":[  
 

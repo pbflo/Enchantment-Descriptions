@@ -1,11 +1,36 @@
 #Potion Descriptions English Language File
 
 #Potion Tooltip
-tooltip.enchdesc.name=Potion
-tooltip.enchdesc.addedby=Added by
-tooltip.enchdesc.missing=No description found. Please ask the author of %s to add one. Localization key is %s
-tooltip.enchdesc.activate=Press %s%s%s for potion descriptions.
+tooltip.potiondesc.name=Effect
+tooltip.potiondesc.addedby=Added by
+tooltip.potiondesc.missing=No description found. Please ask the author of %s to add one. Localization key is %s
+tooltip.potiondesc.activate=Press %s%s%s for effect descriptions.
 
 #Vanilla Potion Descriptions
-potion.minecraft.regeneration.desc=Restores health over time. 
-potion.minecraft.swiftness.desc=Increases speed and FOV.
+potion.minecraft.effect.moveSpeed.desc=Increases speed and FOV.
+potion.minecraft.effect.moveSlowdown.desc=Decreases speed and FOV.
+potion.minecraft.effect.digSpeed.desc=Increases dig speed.
+potion.minecraft.effect.digSlowDown.desc=Decreases dig speed.
+potion.minecraft.effect.damageBoost.desc=Increases damage dealt by the entity.
+potion.minecraft.effect.heal.desc=Increases the entities health slightly.
+potion.minecraft.effect.harm.desc=Decreases the entities health slightly.
+potion.minecraft.effect.jump.desc=Increases jump height.
+potion.minecraft.effect.confusion.desc=Warps the screen of the player.
+potion.minecraft.effect.regeneration.desc=Restores health over time.
+potion.minecraft.effect.resistance.desc=Decreases the damage taken.
+potion.minecraft.effect.fireResistance.desc=Nullifies the damage taken by fire and lava.
+potion.minecraft.effect.waterBreathing.desc=Increases the time a entity can stay underwater.
+potion.minecraft.effect.invisibility.desc=Makes the entity invisible.
+potion.minecraft.effect.blindness.desc=Decreases the view distance of the player.
+potion.minecraft.effect.nightVision.desc=Enables the player to see in the dark.
+potion.minecraft.effect.hunger.desc=Decreases the players hunger.
+potion.minecraft.effect.weakness.desc=Decreases the damage dealt by the entity.
+potion.minecraft.effect.poison.desc=Decreases the entities health until half a heart is left.
+potion.minecraft.effect.wither.desc=Decreases the entities health and turns the hearts black.
+potion.minecraft.effect.healthBoost.desc=Increases the maximum amount of hearts of the entity.
+potion.minecraft.effect.absorption.desc=Gives the entity additional hearts that do not regenerate.
+potion.minecraft.effect.saturation.desc=Increases the players hunger.
+potion.minecraft.effect.glowing.desc=Surrounds the entity with a glowing aura which can be seen through walls.
+potion.minecraft.effect.levitation.desc=Makes the entity float upwards.
+potion.minecraft.effect.luck.desc=Increases the chance of good loot in generated structures.
+potion.minecraft.effect.unluck.desc=Decreases the chance of good loot in generated structures.

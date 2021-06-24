@@ -88,7 +88,7 @@ if (JavaVersion.current().isJava8Compatible()) {
     }
 }
 
-curseforge {
+/*curseforge {
 
     apiKey = findProperty('curse_auth') ?: 0 
     def versions = "${curse_versions}".split(', ')
@@ -134,7 +134,7 @@ curseforge {
         addArtifact(javadocJar)
         addArtifact(deobfJar)
     }
-}
+}*/
 
 task signJar(type: SignJar, dependsOn: reobfJar) {
 

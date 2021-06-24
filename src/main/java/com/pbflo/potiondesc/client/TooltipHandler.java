@@ -1,18 +1,13 @@
-package net.darkhax.enchdesc.client;
+package com.pbflo.potiondesc.client;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.mojang.realmsclient.gui.ChatFormatting;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.client.settings.GameSettings;
-import net.minecraft.client.settings.KeyBinding;
-//import net.minecraft.enchantment.Enchantment;
-//import net.minecraft.item.ItemEnchantedBook;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagList;
+import com.pbflo.potiondesc.handler.ConfigurationHandler;
+
+import net.minecraft.item.*;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.ModContainer;
@@ -21,9 +16,13 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-import net.minecraft.potion.PotionType;
-import net.minecraft.item.ItemPotion;
 import net.minecraft.potion.PotionUtils;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.client.settings.GameSettings;
+import net.minecraft.client.settings.KeyBinding;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 
 @SideOnly(Side.CLIENT)
 public class TooltipHandler {
@@ -33,29 +32,27 @@ public class TooltipHandler {
     @SubscribeEvent
     public void onTooltipDisplayed (ItemTooltipEvent event) {
 
-        if (event.getEntityPlayer() == null) {
-
+        if (event.getEntityPlayer() == null || event.getItemStack().isEmpty()) {
             return;
         }
 
-        if (!event.getItemStack().isEmpty() && event.getItemStack().getItem() instanceof ItemPotion) {
+        final List<String> tooltip = event.getToolTip();
+        final Item i = event.getItemStack().getItem();
 
-            final List<String> tooltip = event.getToolTip();
-
+        if (i instanceof ItemPotion || i instanceof ItemTippedArrow || i instanceof ItemSpectralArrow) {
             if (GameSettings.isKeyDown(keyBindSneak)) {
+                List<PotionEffect> potionEffects = this.getPotionEffects(event.getItemStack());
 
-                final PotionType potiontype = this.getPotionType(event.getItemStack());
-
-               // for (final PotionType potion : potiontypes) {
-
-                    tooltip.add(I18n.format("tooltip.potiondesc.name") + ": " + I18n.format(potiontype.getName()));
-                    tooltip.add(this.getDescription(potiontype));
-                    tooltip.add(I18n.format("tooltip.potiondesc.addedby") + ": " + ChatFormatting.BLUE + getModName(potiontype));
-                //}
+                for (final PotionEffect potion : potionEffects) {
+                    tooltip.add(I18n.format("tooltip.potiondesc.name") + ": " + ChatFormatting.getByChar(ConfigurationHandler.getTitleColor()) + I18n.format(potion.getEffectName()));
+                    tooltip.add(ChatFormatting.getByChar(ConfigurationHandler.getDescColor()) + this.getDescription(potion));
+                    tooltip.add(I18n.format("tooltip.potiondesc.addedby") + ": " + ChatFormatting.BLUE + getModName(potion.getPotion()));
+                }
             }
             else {
                 tooltip.add(I18n.format("tooltip.potiondesc.activate", ChatFormatting.LIGHT_PURPLE, keyBindSneak.getDisplayName(), ChatFormatting.GRAY));
             }
+
         }
     }
 
@@ -65,47 +62,34 @@ public class TooltipHandler {
      * @param potion The potion type to get a description for.
      * @return The potion description.
      */
-    private String getDescription (PotionType potion) {
+    private String getDescription (PotionEffect potion) {
 
         final String key = getTranslationKey(potion);
         String description = I18n.format(key);
 
         if (description.startsWith("potion.")) {
-            description = I18n.format("tooltip.potiondesc.missing", getModName(potion), key);
+            description = I18n.format("tooltip.potiondesc.missing", getModName(potion.getPotion()), key);
         }
 
         return description;
     }
 
     /**
-     * Reads the potion type from an ItemPotion.
+     * Reads the potion effects from an ItemStack.
      *
      * @param stack The stack to read the data from.
      * @return The list of potions stored on the stack.
      */
-    private PotionType getPotionType (ItemStack stack) { //ToDo: Rewrite
-        
-        final PotionType potiontype = getPotionFromItem(stack);
-        
-        /*
-        final NBTTagList potionTags = ItemPotion.getPotionType(stack);
-        final List<PotionType> potiontypes = new ArrayList<>();
+    private List<PotionEffect> getPotionEffects (ItemStack stack) { //ToDo: Rewrite
+        List<PotionEffect> potionEffects = new ArrayList<>();
 
-        if (potionTags != null) {
-
-            for (int index = 0; index < potionTags.tagCount(); ++index) {
-
-                final int id = potionTags.getCompoundTagAt(index).getShort("id"); 
-                final PotionType potion = PotionType.getEnchantmentByID(id);
-
-                if (potion != null) {
-                    potiontypes.add(potion);
-                }
-            }
+        if (stack.getItem() instanceof ItemSpectralArrow) {
+            potionEffects.add(new PotionEffect(Potion.REGISTRY.getObjectById(24)));
+        } else {
+            potionEffects = PotionUtils.getEffectsFromStack(stack);
         }
-        */
 
-        return potiontype;
+        return potionEffects;
     }
 
     /**
@@ -118,7 +102,6 @@ public class TooltipHandler {
     public static String getModName (IForgeRegistryEntry.Impl<?> registerable) {
 
         if (registerable != null && registerable.getRegistryName() != null) {
-
             final String modID = registerable.getRegistryName().getNamespace();
             final ModContainer mod = Loader.instance().getIndexedModList().get(modID);
             return mod != null ? mod.getName() : modID;
@@ -127,11 +110,11 @@ public class TooltipHandler {
         return "NULL";
     }
 
-    public static String getTranslationKey (PotionType potion) {
+    public static String getTranslationKey (PotionEffect potion) {
+        final Potion type = potion.getPotion();
 
-        if (potion != null && potion.getRegistryName() != null) {
-
-            return String.format("potion.%s.%s.desc", potion.getRegistryName().getNamespace(), potion.getRegistryName().getPath());
+        if (potion != null && type.getRegistryName() != null) {
+            return String.format("potion.%s.%s.desc", type.getRegistryName().getNamespace(), potion.getEffectName());
         }
 
         return "NULL";

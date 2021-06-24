@@ -1,11 +1,36 @@
 #Potion Descriptions German Language File
 
 #Potion Tooltip
-tooltip.enchdesc.name=Trank
-tooltip.enchdesc.addedby=Hinzugefügt druch
-tooltip.enchdesc.missing=Keine Beschreibung gefunden. Bitte fragen sie den Autor von %s eine hinzuzufügen. Lokalisierungsschlüssel ist %s
-tooltip.enchdesc.activate=Drück %s%s%s für Trank Beschreibungen.
+tooltip.potiondesc.name=Effekt
+tooltip.potiondesc.addedby=Hinzugefügt druch
+tooltip.potiondesc.missing=Keine Beschreibung gefunden. Bitte fragen sie den Autor von %s eine hinzuzufügen. Lokalisierungsschlüssel ist %s
+tooltip.potiondesc.activate=Drück %s%s%s für Effekt Beschreibungen.
 
 #Vanilla Potion Descriptions
-potion.minecraft.regeneration.desc=Regeneriert Gesundheit über Zeit. 
-potion.minecraft.swiftness.desc=Erhöht die Geschwindigkeit und das FOV.
+potion.minecraft.effect.moveSpeed.desc=Erhöht die Geschwindigkeit und das FOV.
+potion.minecraft.effect.moveSlowdown.desc=Verringert die Geschwindigkeit und das FOV.
+potion.minecraft.effect.digSpeed.desc=Erhöht die Abbaugeschwindigkeit.
+potion.minecraft.effect.digSlowDown.desc=Verringert die Abbaugeschwindigkeit.
+potion.minecraft.effect.damageBoost.desc=Erhöht den ausgeübten Schaden des Objekts.
+potion.minecraft.effect.heal.desc=Erhöht die Gesundheit des Objekts leicht.
+potion.minecraft.effect.harm.desc=Verringert die Gesundheit des Objekts leicht.
+potion.minecraft.effect.jump.desc=Erhöht die Sprunghöhe.
+potion.minecraft.effect.confusion.desc=Verzieht die Sicht des Spielers.
+potion.minecraft.effect.regeneration.desc=Regeneriert Gesundheit über Zeit.
+potion.minecraft.effect.resistance.desc=Verringert den erhaltenen Schaden.
+potion.minecraft.effect.fireResistance.desc=Anulliert den Schaden von Feuer und Lava.
+potion.minecraft.effect.waterBreathing.desc=Erhöht die Zeit, die ein Objekt Unterwasser verbringen kann.
+potion.minecraft.effect.invisibility.desc=Macht das Objekt unsichtbar.
+potion.minecraft.effect.blindness.desc=Verringert die Sichtweite des Spielers.
+potion.minecraft.effect.nightVision.desc=Erlaubt dem Spieler im Dunkeln zu sehen.
+potion.minecraft.effect.hunger.desc=Verringert die Hungerleiste des Spielers.
+potion.minecraft.effect.weakness.desc=Verringert den ausgeübten Schaden des Objekts.
+potion.minecraft.effect.poison.desc=Verringert das Leben des Objekts bis ein halbes Herz übrig bleibt.
+potion.minecraft.effect.wither.desc=Verringert das Leben des Objekts und färbt die Herzen schwarz.
+potion.minecraft.effect.healthBoost.desc=Erhöht die Maximalanzahl der Herzen eines Objektes.
+potion.minecraft.effect.absorption.desc=Gibt dem Objekt weitere Herzen die nach ihrem Verlust nicht regenerieren.
+potion.minecraft.effect.saturation.desc=Erhöht die Hungerleiste des Spielers.
+potion.minecraft.effect.glowing.desc=Umhüllt das Objekt mit einer leuchtenden Aura, die man auch durch Wände sieht.
+potion.minecraft.effect.levitation.desc=Lässt ein Objekt nach oben fliegen.
+potion.minecraft.effect.luck.desc=Erhöht die Chance auf gute Beute in generierten Strukturen.
+potion.minecraft.effect.unluck.desc=Verringert die Chance auf gute Beute in generierten Strukturen.
